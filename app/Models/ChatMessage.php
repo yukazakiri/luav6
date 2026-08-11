@@ -11,7 +11,6 @@ class ChatMessage extends Model
         'session_id',
         'role',
         'content',
-        'thinking',
         'attachments',
     ];
 

@@ -168,12 +168,9 @@ class ChatHistoryController extends Controller
                     $text = (string) $response->text;
 
                     if (trim($text) !== '') {
-                        $thinking = $this->chatService->combineReasoning($response->events);
-
                         $session->messages()->create([
                             'role' => 'assistant',
                             'content' => $text,
-                            'thinking' => $thinking !== '' ? $thinking : null,
                         ]);
                         $session->touch();
                     }
@@ -247,7 +244,6 @@ class ChatHistoryController extends Controller
                 'id' => $msg->id,
                 'role' => $msg->role,
                 'content' => $msg->content,
-                'thinking' => $msg->thinking,
                 'attachments' => $msg->attachments,
                 'createdAt' => $msg->created_at?->toIso8601String(),
             ])->values()->all(),
